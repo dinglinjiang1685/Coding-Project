@@ -1,10 +1,14 @@
 print()
 
-pollResult = []
+import random
+
+pollresult = []
+pollResult = {"mach": 0, "web": 0, "graph": 0, "block": 0, "compro": 0}
 pollOption = [
     "machine learning", "web development", "graphic/ui design", "blockchain",
     "competitive programming"
 ]
+
 pollOptionSimplified = ["mach", "web", "graph", "block", "compro"]
 
 print(
@@ -22,26 +26,35 @@ for i in range(0, 6):
         print("invalid option, please see our options")
         newChoice = input()
     else:
-        pollResult.append(newChoice)
+        pollresult.append(newChoice)
 
-machine_learning = pollResult.count("mach")
-web_development = pollResult.count("web")
-graphic_or_ui_design = pollResult.count("graph")
-blockchain = pollResult.count("block")
-competitive_programming = pollResult.count("compro")
+machine_learning = pollresult.count("mach")
+web_development = pollresult.count("web")
+graphic_or_ui_design = pollresult.count("graph")
+blockchain = pollresult.count("block")
+competitive_programming = pollresult.count("compro")
+
+pollResult["mach"] = machine_learning
+pollResult["web"] = web_development
+pollResult["graph"] = graphic_or_ui_design
+pollResult["block"] = blockchain
+pollResult["compro"] = competitive_programming
+
+Tiebreaker = []
+def largest():
+    name = ""
+    high = 0
+    for x in pollOptionSimplified:
+        i = pollResult[x]
+        if (i > high):
+            high = i
+            name = x
+        if (i == high):
+            #tiebreaker
+            print("there is a tie")
+            Tiebreaker.append(x)
+            random.choice(Tiebreaker)
+    return "The option which get the most votes is: ", name
 
 
-def largest(s1, s2, s3, s4, s5):
-    if (s1 > s2) and (s1 > s3) and (s1 > s4) and (s1 > s5):
-        largest_num = "machine learning"
-    elif (s2 > s1) and (s2 > s3) and (s2 > s4) and (s2 > s5):
-        largest_num = "web development"
-    elif (s3 > s1) and (s3 > s2) and (s3 > s4) and (s3 > s5):
-        largest_num = "graphic/ui design"
-    elif (s4 > s1) and (s4 > s3) and (s4 > s2) and (s4 > s5):
-        largest_num = "blockchain"
-    else:
-        largest_num = "competitive programming"
-    print("The option which get the most votes is: ", largest_num)
-
-print(largest(machine_learning, web_development, graphic_or_ui_design, blockchain, competitive_programming))
+print(largest())
