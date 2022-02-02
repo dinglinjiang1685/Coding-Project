@@ -42,6 +42,7 @@ pollResult["compro"] = competitive_programming
 
 Tiebreaker = []
 def largest():
+    global name
     name = ""
     high = 0
     for x in pollOptionSimplified:
@@ -49,12 +50,12 @@ def largest():
         if (i > high):
             high = i
             name = x
-        if (i == high):
+        elif (i == high):
             #tiebreaker
-            print("there is a tie")
+            print("there is a tie, the winner will be decided via random selection")
             Tiebreaker.append(x)
             random.choice(Tiebreaker)
-    return "The option which get the most votes is: ", name
+    return ("The option which get the most votes is: "+ name.strip("()(\'\',"))
 
 
 print(largest())
